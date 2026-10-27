@@ -10,6 +10,11 @@ Required:
 Optional:
     - description
     - template_id
+    - timeouts (block):
+        - create (optional)
+        - delete (optional)
+        - read (optional)
+        - update (optional)
 EOT
 
   type = map(object({
@@ -20,6 +25,12 @@ EOT
     template_id  = optional(string)
     permissions = list(object({
       allowed_resource_actions = set(string)
+    }))
+    timeouts = optional(object({
+      create = optional(string)
+      delete = optional(string)
+      read   = optional(string)
+      update = optional(string)
     }))
   }))
   validation {

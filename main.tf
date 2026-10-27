@@ -13,5 +13,15 @@ resource "azuread_custom_directory_role" "custom_directory_roles" {
       allowed_resource_actions = permissions.value.allowed_resource_actions
     }
   }
+
+  dynamic "timeouts" {
+    for_each = each.value.timeouts != null ? [each.value.timeouts] : []
+    content {
+      create = timeouts.value.create
+      delete = timeouts.value.delete
+      read   = timeouts.value.read
+      update = timeouts.value.update
+    }
+  }
 }
 
